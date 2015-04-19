@@ -5,6 +5,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA.Api", "source\SP.Api\SA.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA.Web.UI", "source\SA.Web.UI\SA.Web.UI.csproj", "{0B642A34-7F5E-452D-B058-F5B61BF206C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA.Authentication.Api", "source\SA.Authentication.Api\SA.Authentication.Api.csproj", "{5B9C6A58-8226-4DB9-95C2-43B10AE9B3A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{24AAB7BE-5EFA-4189-B703-6F87615A5BFF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reporting", "Reporting", "{A04F25CF-5D86-4F93-99B8-CBFDA10CC4EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SurveryCapture", "SurveryCapture", "{505E4F0A-37B5-4283-ACD0-44513E32B705}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA.Authentication.UI", "source\SA.Authentication.UI\SA.Authentication.UI.csproj", "{89D72ECB-7A6C-4458-8C0B-66F99B3C7224}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,8 +29,22 @@ Global
 		{0B642A34-7F5E-452D-B058-F5B61BF206C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B642A34-7F5E-452D-B058-F5B61BF206C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B642A34-7F5E-452D-B058-F5B61BF206C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B9C6A58-8226-4DB9-95C2-43B10AE9B3A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B9C6A58-8226-4DB9-95C2-43B10AE9B3A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B9C6A58-8226-4DB9-95C2-43B10AE9B3A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B9C6A58-8226-4DB9-95C2-43B10AE9B3A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89D72ECB-7A6C-4458-8C0B-66F99B3C7224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89D72ECB-7A6C-4458-8C0B-66F99B3C7224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89D72ECB-7A6C-4458-8C0B-66F99B3C7224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89D72ECB-7A6C-4458-8C0B-66F99B3C7224}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5B9C6A58-8226-4DB9-95C2-43B10AE9B3A4} = {24AAB7BE-5EFA-4189-B703-6F87615A5BFF}
+		{89D72ECB-7A6C-4458-8C0B-66F99B3C7224} = {24AAB7BE-5EFA-4189-B703-6F87615A5BFF}
+		{CA9E9C86-5DB4-428E-98DD-CD68597EE2D2} = {505E4F0A-37B5-4283-ACD0-44513E32B705}
+		{0B642A34-7F5E-452D-B058-F5B61BF206C5} = {505E4F0A-37B5-4283-ACD0-44513E32B705}
 	EndGlobalSection
 EndGlobal
