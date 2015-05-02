@@ -1,4 +1,5 @@
-﻿using Autofac.Integration.WebApi;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
@@ -18,7 +19,7 @@ namespace SA.Authentication.Api
             var container = Bootstrapper.Run();
             HttpConfiguration config = new HttpConfiguration { DependencyResolver = new AutofacWebApiDependencyResolver(container) };
           
-            ConfigureOAuth(app);
+            ConfigureOAuth(app, container);
 
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
@@ -28,18 +29,10 @@ namespace SA.Authentication.Api
             app.UseWebApi(config);
         }
 
-        public void ConfigureOAuth(IAppBuilder app)
+        public void ConfigureOAuth(IAppBuilder app, IContainer container)
         {
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
-            {
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new CustomAuthorizationServerProvider()
-            };
-
             // Token Generation
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            app.UseOAuthAuthorizationServer(container.Resolve<IOAuthAuthorizationServerOptions>().GetOptions());
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
         }
