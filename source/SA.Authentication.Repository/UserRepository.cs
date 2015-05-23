@@ -5,27 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Data;
 namespace SA.Authentication.Repository
 {
     public class UserRepository : IUserRepository
     {
         readonly Func<IAccessor> accessor;
+
         public UserRepository(Func<IAccessor> accessor)
         {
             this.accessor = accessor;
         }
         public Models.User GetUserByUsername(string username)
         {
-            //retreive from database
-
-            //using (var db = accessor())
-            //{
-            //    db.GetConnection("").Query<Models.User>(new CommandDefinition("select * from users where username=@username", new { username = username }));
-            //}
-
-            if (username == "test")
-                return new Models.User { Password = "test", Name = "Test", Username = username };
-            return new Models.User();
+            using (var db = accessor())
+            {
+                return db.ExecuteQuery<Models.User>("SurvayDataConnection", query => query.Query<Models.User>(new CommandDefinition("[System].[GetUser]", new { Username = username }, commandType: CommandType.StoredProcedure)).FirstOrDefault());
+            }
         }
     }
 }

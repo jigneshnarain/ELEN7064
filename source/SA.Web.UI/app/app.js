@@ -11,5 +11,5 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.constant('ngSettings', {
-    apiBaseUri: 'http://localhost:46781/api/'
+    apiBaseUri: 'http://localhost:32104/api/'
 });
