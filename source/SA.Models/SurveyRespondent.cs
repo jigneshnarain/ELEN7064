@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SA.Authentication.Models
+namespace SA.Models
 {
-    public class User
+    public class SurveyRespondent
     {
         public Guid Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
         public string Name { get; set; }
+        public string MobileNumber { get; set; }
+        public byte GenderId { get; set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }

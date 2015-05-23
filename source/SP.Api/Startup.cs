@@ -22,7 +22,7 @@ namespace SA.Api
             app.UseAutofacWebApi(config);
 
             WebApiConfig.Register(config);
-
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
         }
     }
