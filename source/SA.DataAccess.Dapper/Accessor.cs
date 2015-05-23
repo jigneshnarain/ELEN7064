@@ -11,18 +11,37 @@ namespace SA.DataAccess.Sql
 {
     public interface IAccessor : IDisposable
     {
-        IDbConnection GetConnection(string connectionStringName);
+        T ExecuteQuery<T>(string connectionStringName, Func<IDbConnection, T> query);
+        void ExecuteCommand(string connectionStringName, Action<IDbConnection> command);
     }
     public class Accessor : IAccessor
     {
-        private IDbConnection connection;
+        private readonly IDbConnection connection;
 
-        public IDbConnection GetConnection(string connectionStringName)
+        public Accessor(IDbConnection connection)
         {
+            this.connection = connection;
+        }
+
+        public T ExecuteQuery<T>(string connectionStringName, Func<IDbConnection, T> query)
+        {
+            InitialiseConnection(connectionStringName);
+            return query(connection);
+        }
+
+        public void ExecuteCommand(string connectionStringName, Action<IDbConnection> command)
+        {
+            InitialiseConnection(connectionStringName);
+            command(connection);
+        }
+
+
+        private void InitialiseConnection(string connectionStringName)
+        {
+            if (connection.State == ConnectionState.Open) return;
             string connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            connection.ConnectionString = connectionString;
             connection.Open();
-            return connection;
         }
 
         public void Dispose()

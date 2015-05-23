@@ -5,6 +5,7 @@ using SA.Authentication.Repository;
 using SA.DataAccess.Sql;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -20,6 +21,7 @@ namespace SA.Authentication.Api
             builder.RegisterType<CustomAuthorizationServerProvider>().As<IOAuthAuthorizationServerProvider>();
             builder.RegisterType<CustomOAuthAuthorizationServerOptions>().AsImplementedInterfaces();
             builder.RegisterType<UserRepository>().AsImplementedInterfaces();
+            builder.RegisterType<SqlConnection>().AsImplementedInterfaces().InstancePerDependency();
             builder.RegisterType<Accessor>().AsImplementedInterfaces().InstancePerDependency();
             return builder.Build();
         }
