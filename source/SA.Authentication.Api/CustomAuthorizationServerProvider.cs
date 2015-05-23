@@ -40,7 +40,7 @@ namespace SA.Authentication.Api
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
             identity.AddClaim(new Claim("UserId", user.Id.ToString()));
-            identity.AddCliam(new Claim(ClaimTypes.GivenName, user.Name));
+            identity.AddClaim(new Claim(ClaimTypes.GivenName, user.Name));
 
             context.Validated(identity);
         }
