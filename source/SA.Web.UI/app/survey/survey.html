@@ -1,0 +1,26 @@
+﻿<form name="surveyFrom" ng-controller="surveyController">
+    <div ng-repeat="question in questions">
+        <label>{{question.description}}</label>
+        <div ng-repeat="questionOption in question.questionOptions">
+            <div ng-switch on="question.type">
+                <div ng-switch-when="1">
+                    <input type="hidden"  ng-model="$parent.$parent.$parent.selectedOption[$parent.$parent.$index].id" value="{{questionOption.id}}"  />
+                    <input type="text" ng-model="$parent.$parent.$parent.selectedOption[$parent.$parent.$index].reponseData" ng-change="$parent.$parent.$parent.appendId(questionOption.id, $parent.$parent.$index)"  value="{{questionOption.id}}" />
+                </div>
+                <div ng-switch-when="2">
+                    <label>
+                        <input type="radio" name="{{'group-'+$parent.$parent.$index}}" ng-model="$parent.$parent.$parent.selectedOption[$parent.$parent.$index].id" value="{{questionOption.id}}" />
+                        {{questionOption.description}}
+                    </label>
+                </div>
+                <div ng-switch-when="3">
+                    <label>
+                    <input type="checkbox" ng-click="$parent.$parent.$parent.toggleSelection(questionOption, $id)" value="{{questionOption.id}}" />
+                     {{questionOption.description}}
+                        </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="submit" ng-click="submit(response)" value="Save" />
+</form>
