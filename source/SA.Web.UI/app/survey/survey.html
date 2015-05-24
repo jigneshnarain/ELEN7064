@@ -15,7 +15,7 @@
                 </div>
                 <div ng-switch-when="3">
                     <label>
-                    <input type="checkbox" ng-click="$parent.$parent.$parent.toggleSelection(questionOption, $id)" value="{{questionOption.id}}" />
+                    <input type="checkbox" checklist-model="$parent.$parent.$parent.selectedOption"  checklist-value="questionOption" />
                      {{questionOption.description}}
                         </label>
                 </div>
