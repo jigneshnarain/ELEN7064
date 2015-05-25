@@ -8,7 +8,6 @@ namespace SA.Models
 {
     public class SuveryResponseDetail
     {
-        public Guid SurveyResponseId { get; set; }
         public Guid SurveyQuestionOptionId { get; set; }
         public string ResponseData { get; set; }
     }

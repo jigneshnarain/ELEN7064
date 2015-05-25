@@ -4,23 +4,23 @@
         <div ng-repeat="questionOption in question.questionOptions">
             <div ng-switch on="question.type">
                 <div ng-switch-when="1">
-                    <input type="hidden"  ng-model="$parent.$parent.$parent.selectedOption[$parent.$parent.$index].id" value="{{questionOption.id}}"  />
-                    <input type="text" ng-model="$parent.$parent.$parent.selectedOption[$parent.$parent.$index].reponseData" ng-change="$parent.$parent.$parent.appendId(questionOption.id, $parent.$parent.$index)"  value="{{questionOption.id}}" />
+                    <input type="hidden" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId" value="{{questionOption.id}}" ng-init="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId=questionOption.id" />
+                    <input type="text" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].responseData" />
                 </div>
                 <div ng-switch-when="2">
                     <label>
-                        <input type="radio" name="{{'group-'+$parent.$parent.$index}}" ng-model="$parent.$parent.$parent.selectedOption[$parent.$parent.$index].id" value="{{questionOption.id}}" />
+                        <input type="radio" name="{{'group-'+$parent.$parent.$index}}" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId" value="{{questionOption.id}}" />
                         {{questionOption.description}}
                     </label>
                 </div>
                 <div ng-switch-when="3">
                     <label>
-                    <input type="checkbox" checklist-model="$parent.$parent.$parent.selectedOption"  checklist-value="questionOption" />
+                        <input type="checkbox" ng-model="selectedOption" ng-change="$parent.$parent.$parent.toggleSelection(questionOption.id,$parent.$parent.$index)"  />
                      {{questionOption.description}}
                         </label>
                 </div>
             </div>
         </div>
     </div>
-    <input type="submit" ng-click="submit(response)" value="Save" />
+    <input type="submit" ng-click="submit()" value="Save" />
 </form>
