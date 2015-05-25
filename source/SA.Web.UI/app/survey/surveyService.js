@@ -5,7 +5,7 @@
         },
         save: function (response) {
             //check if online publish to server else save to indexeddb
-            $resource(ngSettings.apiBaseUri + 'SurveyResponse').save(response);
+            return $resource(ngSettings.apiBaseUri + 'SurveyResponse').save(response);
         }
 
     }

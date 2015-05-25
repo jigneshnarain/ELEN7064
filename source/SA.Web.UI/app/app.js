@@ -1,4 +1,4 @@
-﻿var app = angular.module('surveyapp', ['ngRoute', 'ngResource','checklist-model']);
+﻿var app = angular.module('surveyapp', ['ngRoute', 'ngResource']);
 
 app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({enabled: true, requireBase: false});

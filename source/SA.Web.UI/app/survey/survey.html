@@ -1,26 +1,32 @@
-﻿<form name="surveyFrom" ng-controller="surveyController">
-    <div ng-repeat="question in questions">
-        <label>{{question.description}}</label>
-        <div ng-repeat="questionOption in question.questionOptions">
-            <div ng-switch on="question.type">
-                <div ng-switch-when="1">
-                    <input type="hidden" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId" value="{{questionOption.id}}" ng-init="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId=questionOption.id" />
-                    <input type="text" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].responseData" />
-                </div>
-                <div ng-switch-when="2">
-                    <label>
-                        <input type="radio" name="{{'group-'+$parent.$parent.$index}}" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId" value="{{questionOption.id}}" />
-                        {{questionOption.description}}
-                    </label>
-                </div>
-                <div ng-switch-when="3">
-                    <label>
-                        <input type="checkbox" ng-model="selectedOption" ng-change="$parent.$parent.$parent.toggleSelection(questionOption.id,$parent.$parent.$index)"  />
-                     {{questionOption.description}}
+﻿<section ng-controller="surveyController">
+    <form name="surveyFrom" ng-submit="submit()" ng-hide="surveySubmitted">
+        <div ng-repeat="question in questions">
+            <label>{{question.description}}</label>
+            <div ng-repeat="questionOption in question.questionOptions">
+                <div ng-switch on="question.type">
+                    <div ng-switch-when="1">
+                        <input type="hidden" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId" value="{{questionOption.id}}" ng-init="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId=questionOption.id" />
+                        <input type="text" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].responseData" />
+                    </div>
+                    <div ng-switch-when="2">
+                        <label>
+                            <input type="radio" name="{{'group-'+$parent.$parent.$index}}" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId" value="{{questionOption.id}}" />
+                            {{questionOption.description}}
                         </label>
+                    </div>
+                    <div ng-switch-when="3">
+                        <label>
+                            <input type="checkbox" ng-model="selectedOption" ng-change="$parent.$parent.$parent.toggleSelection(questionOption.id,$parent.$parent.$index)" />
+                            {{questionOption.description}}
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
+        <input type="submit" value="Save" />
+    </form>
+    <div ng-if="surveySubmitted == true">
+        <button ng-click="captureAnother()">Capture another</button>
+        <button ng-click="selecteNewSurvey()">Select new survey</button>
     </div>
-    <input type="submit" ng-click="submit()" value="Save" />
-</form>
+</section>
