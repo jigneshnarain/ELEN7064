@@ -3,11 +3,11 @@
 app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true, requireBase: false });
     $routeProvider
-    .when("/viewname", {
-        controller: "controller",
+    .when("/surveryReportsView", {
+        controller: "surveyReportscontroller",
         templateUrl: "path to html page"
     })
-     .otherwise({ redirectTo: "/" });
+     .otherwise({ redirectTo: "app/login/login.html" });
 });
 
 app.constant('ngSettings', {
