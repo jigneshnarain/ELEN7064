@@ -1,6 +1,7 @@
-﻿var app = angular.module('surveyapp', ['ngRoute', 'ngResource']);
+﻿'use strict';
+var app = angular.module('surveyapp', ['ngRoute', 'ngResource', 'LocalForageModule']);
 
-app.config(function ($routeProvider, $locationProvider) {
+app.config(function ($routeProvider, $locationProvider, $localForageProvider) {
     $locationProvider.html5Mode({enabled: true, requireBase: false});
     $routeProvider
     .when("/", {
@@ -8,6 +9,13 @@ app.config(function ($routeProvider, $locationProvider) {
         templateUrl: "app/home/home.html"
     })
      .otherwise({ redirectTo: "/" });
+
+    $localForageProvider.config({
+        name: 'SurveyCapture', 
+        version: 1.0, 
+        storeName: 'surveys'
+        
+    });
 });
 
 app.constant('ngSettings', {
