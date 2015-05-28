@@ -2,25 +2,17 @@
 
     $scope.surveys = [];
 
-    $localForage.length().then(function(count){
-        if ( count > 0) {
-            $localForage.iterate(function (value, key) {
-                return value;
-            }).then(function (data) {
-                $scope.surveys.push(data);
-            });
-        }
-        else {
-            homeService.getSurveys().$promise.then(function (response) {
-                $scope.surveys = response;
+
+
+
+        homeService.getSurveys().then(function (response) {
+            $scope.surveys = response;
+            if (navigator.onLine) {
                 angular.forEach(response, function (value, key) {
                     $localForage.setItem(value.id, value);
                 });
-
-            });
-        }
-    });
-
+            }
+        });
 
     $scope.displaySurvey = function () {
         $scope.template = 'app/survey/survey.html';

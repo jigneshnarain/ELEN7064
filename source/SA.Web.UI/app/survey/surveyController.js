@@ -1,4 +1,4 @@
-﻿app.controller('surveyController', function ($scope, surveyService) {
+﻿app.controller('surveyController', function ($scope, surveyService, $localForage) {
     $scope.selectedOptions = [];
     $scope.response = { surveyDataId: $scope.$parent.$parent.selectedSurvey, startDateTime: new Date().toLocaleString() };
     $scope.questions = $scope.$parent.$parent.surveys[0].questions;//surveyService.getQuestion($scope.$parent.$parent.selectedSurvey);
@@ -22,11 +22,18 @@
     $scope.submit = function (response) {
         $scope.response.endDateTime = new Date().toLocaleString();
         $scope.response.suveryResponseDetails = [].concat.apply([], $scope.selectedOptions);
-        surveyService.save($scope.response).$promise.then(function (success) {
+
+        var surveyResponsesInstance = $localForage.instance("surveyResponses");
+
+        surveyResponsesInstance.setItem('my2ndInstance', $scope.response).then(function (data) {
             $scope.surveySubmitted = true;
             $scope.questions = [];
-        }, function(error){
         });
+        //surveyService.save($scope.response).$promise.then(function (success) {
+        //    $scope.surveySubmitted = true;
+        //    $scope.questions = [];
+        //}, function(error){
+        //});
     };
 
     $scope.captureAnother = function () {

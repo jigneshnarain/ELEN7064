@@ -1,7 +1,7 @@
-﻿app.factory('homeService', ['$resource',  'ngSettings', function ($resource, ngSettings) {  
+﻿app.factory('homeService', function (persistenceService) {
     return {
         getSurveys: function () {
-           return $resource(ngSettings.apiBaseUri + 'survey').query();
+            return persistenceService.action.getAll('survey') 
         }
     }
-}]);
+});
