@@ -73,6 +73,7 @@
     <Content Include="content\bootstrap-theme.min.css" />
     <Content Include="content\bootstrap.css" />
     <Content Include="content\bootstrap.min.css" />
+    <Content Include="content\loading-bar.css" />
     <Content Include="content\normalize.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Icon.png" />
@@ -857,11 +858,9 @@
     <None Include="scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="scripts\jquery-2.1.4.js" />
     <Content Include="scripts\jquery-2.1.4.min.js" />
+    <Content Include="scripts\loading-bar.js" />
     <Content Include="scripts\localforage.min.js" />
-    <Content Include="scripts\lodash.js" />
-    <Content Include="scripts\lodash.min.js" />
     <Content Include="scripts\npm.js" />
-    <Content Include="scripts\offline.min.js" />
     <Content Include="scripts\angular-uuid2.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>

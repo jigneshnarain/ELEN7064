@@ -1,7 +1,7 @@
 ﻿'use strict';
-var app = angular.module('surveyapp', ['ngRoute', 'ngResource', 'LocalForageModule','angularUUID2']);
+var app = angular.module('surveyapp', ['ngRoute', 'ngResource', 'LocalForageModule','angularUUID2', 'angular-loading-bar']);
 
-app.config(function ($routeProvider, $locationProvider, $localForageProvider) {
+app.config(function ($routeProvider, $locationProvider, $localForageProvider, cfpLoadingBarProvider) {
     $locationProvider.html5Mode({enabled: true, requireBase: false});
     $routeProvider
     .when("/", {
@@ -13,6 +13,8 @@ app.config(function ($routeProvider, $locationProvider, $localForageProvider) {
     $localForageProvider.config({
         name: 'surveyResponse' 
     });
+
+    cfpLoadingBarProvider.includeSpinner = false;
 });
 
 app.constant('ngSettings', {

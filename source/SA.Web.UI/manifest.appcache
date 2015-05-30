@@ -16,6 +16,7 @@ app/persistenceService.js
 content/normalize.css
 content/bootstrap.min.css
 content/bootstrap-theme.min.css
+content/loading-bar.css
 scripts/jquery-2.1.4.min.js
 scripts/bootstrap.min.js
 scripts/angular.min.js
@@ -24,9 +25,8 @@ scripts/angular-route.min.js
 scripts/localforage.min.js
 scripts/angular-localForage.js
 scripts/angular-uuid2.min.js
+scripts/loading-bar.js
 index.html
 
 NETWORK:
 *
-http://*
-https://*
