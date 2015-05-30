@@ -1,10 +1,11 @@
-﻿<h1>Survery Capture</h1>
-<div ng-hide="hideSelection">
-    <label for="survey">Select a survey</label>
-    <select id="survey1" name="survey1" ng-model="selectedSurvey" ng-options="survey.id as survey.name for survey in surveys">
-        <option value="">Select...</option>
-    </select>
-    <button ng-if="selectedSurvey != null" ng-click="displaySurvey()">Start Survey</button>
+﻿<div ng-hide="hideSelection" class="form-group">
+    <div class="form-group">
+        <label for="survey">Select a survey</label>
+        <select class="form-control" id="survey1" name="survey1" ng-model="selectedSurvey" ng-options="survey.id as survey.name for survey in surveys">
+            <option value="">Select...</option>
+        </select>
+    </div>
+    <button class="btn btn-primary btn-md" ng-if="selectedSurvey != null" ng-click="displaySurvey()">Start Survey</button>
 </div>
-<section ng-include="template">
-</section>
+
+<section ng-include="template"></section>

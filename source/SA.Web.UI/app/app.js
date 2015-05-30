@@ -1,7 +1,7 @@
 ﻿'use strict';
-var app = angular.module('surveyapp', ['ngRoute', 'ngResource', 'LocalForageModule']);
+var app = angular.module('surveyapp', ['ngRoute', 'ngResource', 'LocalForageModule','angularUUID2']);
 
-app.config(function ($routeProvider, $locationProvider, $localForageProvider, $provide) {
+app.config(function ($routeProvider, $locationProvider, $localForageProvider) {
     $locationProvider.html5Mode({enabled: true, requireBase: false});
     $routeProvider
     .when("/", {
@@ -11,18 +11,8 @@ app.config(function ($routeProvider, $locationProvider, $localForageProvider, $p
      .otherwise({ redirectTo: "/" });
 
     $localForageProvider.config({
-        name: 'SurveyData'        
+        name: 'surveyResponse' 
     });
-
-    //$localForageProvider.config({
-    //    name: 'SurveyResponses'
-    //});
-
-    window.Offline.options = {
-        checkOnLoad: false
-    }
-
-    $provide.constant('offline', window.Offline);
 });
 
 app.constant('ngSettings', {

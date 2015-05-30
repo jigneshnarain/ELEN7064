@@ -9,21 +9,30 @@
 </head>
 <body ng-cloak>
     <header>
-        <nav></nav>
+        <section class="jumbotron">
+            <div class="container">
+                <h2>Survey Application</h2>
+            </div>
+        </section>
     </header>
-    <article>
-        <section ng-view></section>
+    <article class="container">
+        <section class="alert alert-info"
+                 data-ng-show="hasStoredDataToSync"
+                 data-ng-controller="synchronisationController">
+            <span>You have local data to sync to the server.</span>
+            <button data-ng-click="sync()" class="btn btn-primary btn-md">Sync</button>
+        </section>
+        <section class="row" ng-view></section>
     </article>
     <!-- 3rd party libraries -->
     <script src="scripts/jquery-2.1.4.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-resource.min.js"></script>
-    <script src="scripts/angular-route.min.js"></script>
-    <script src="scripts/offline.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>    
     <script src="scripts/localforage.min.js"></script>
     <script src="scripts/angular-localForage.js"></script>
-    <script src="scripts/lodash.min.js"></script>
+    <script src="scripts/angular-uuid2.min.js"></script>
     <!-- Load app main script -->
     <script src="app/app.js"></script>
     <!-- Load services -->
@@ -32,8 +41,10 @@
     <script src="app/persistenceService.js"></script>
     <script src="app/offlinePersistanceStrategy.js"></script>
     <script src="app/onlinePersistanceStrategy.js"></script>
+    <script src="app/synchronisation/synchronisationService.js"></script>
     <!-- Load controllers -->
     <script src="app/home/homeController.js"></script>
+    <script src="app/synchronisation/synchronisationController.js"></script>
     <script src="app/survey/surveyController.js"></script>
     <!-- Load custom filters -->
     <!-- Load custom directives -->

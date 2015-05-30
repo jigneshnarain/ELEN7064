@@ -1,16 +1,18 @@
 ﻿CACHE MANIFEST
 
 CACHE:
-app\home\home.html
-app\home\homeController.js
-app\home\homeService.js
-app\survey\survey.html
-app\survey\surveyController.js
-app\survey\surveyService.js
-app\app.js
-app\offlinePersistanceStrategy.js
-app\onlinePersistanceStrategy.js
-app\persistenceService.js
+app/home/home.html
+app/home/homeController.js
+app/home/homeService.js
+app/survey/survey.html
+app/survey/surveyController.js
+app/survey/surveyService.js
+app/synchronisation/synchronisationController.js
+app/synchronisation/synchronisationService.js
+app/app.js
+app/offlinePersistanceStrategy.js
+app/onlinePersistanceStrategy.js
+app/persistenceService.js
 content/normalize.css
 content/bootstrap.min.css
 content/bootstrap-theme.min.css
@@ -21,11 +23,10 @@ scripts/angular-resource.min.js
 scripts/angular-route.min.js
 scripts/localforage.min.js
 scripts/angular-localForage.js
+scripts/angular-uuid2.min.js
 index.html
+
 NETWORK:
 *
 http://*
 https://*
- 
-SETTINGS:
-prefer-online

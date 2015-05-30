@@ -1,7 +1,12 @@
-﻿app.controller('surveyController', function ($scope, surveyService, $localForage) {
+﻿app.controller('surveyController', function ($scope, surveyService, $localForage, uuid2) {
     $scope.selectedOptions = [];
-    $scope.response = { surveyDataId: $scope.$parent.$parent.selectedSurvey, startDateTime: new Date().toLocaleString() };
-    $scope.questions = $scope.$parent.$parent.surveys[0].questions;//surveyService.getQuestion($scope.$parent.$parent.selectedSurvey);
+    $scope.response = { id: uuid2.newuuid(), surveyDataId: $scope.$parent.$parent.selectedSurvey, startDateTime: new Date().toLocaleString() };
+
+    angular.forEach($scope.$parent.$parent.surveys, function (value, key) {
+        if ($scope.$parent.$parent.selectedSurvey == value.id)
+            $scope.questions = value.questions;
+    });
+
     $scope.surveySubmitted = false;
     $scope.toggleSelection = function (questionOptionId, index) {
 
@@ -23,17 +28,11 @@
         $scope.response.endDateTime = new Date().toLocaleString();
         $scope.response.suveryResponseDetails = [].concat.apply([], $scope.selectedOptions);
 
-        var surveyResponsesInstance = $localForage.instance("surveyResponses");
-
-        surveyResponsesInstance.setItem('my2ndInstance', $scope.response).then(function (data) {
+        surveyService.save($scope.response).then(function (success) {
             $scope.surveySubmitted = true;
             $scope.questions = [];
+        }, function(error){
         });
-        //surveyService.save($scope.response).$promise.then(function (success) {
-        //    $scope.surveySubmitted = true;
-        //    $scope.questions = [];
-        //}, function(error){
-        //});
     };
 
     $scope.captureAnother = function () {

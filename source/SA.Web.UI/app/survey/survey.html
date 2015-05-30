@@ -1,20 +1,20 @@
 ﻿<section ng-controller="surveyController">
-    <form name="surveyFrom" ng-submit="submit()" ng-hide="surveySubmitted">
+    <form name="surveyFrom" ng-submit="submit()" ng-hide="surveySubmitted" class="well col-md">
         <div ng-repeat="question in questions">
             <label>{{question.description}}</label>
             <div ng-repeat="questionOption in question.questionOptions">
                 <div ng-switch on="question.type">
                     <div ng-switch-when="1">
                         <input type="hidden" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId" value="{{questionOption.id}}" ng-init="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId=questionOption.id" />
-                        <input type="text" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].responseData" />
+                        <input type="text" class="form-control" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].responseData" />
                     </div>
-                    <div ng-switch-when="2">
+                    <div ng-switch-when="2" class="radio">
                         <label>
                             <input type="radio" name="{{'group-'+$parent.$parent.$index}}" ng-model="$parent.$parent.$parent.selectedOptions[$parent.$parent.$index].surveyQuestionOptionId" value="{{questionOption.id}}" />
                             {{questionOption.description}}
                         </label>
                     </div>
-                    <div ng-switch-when="3">
+                    <div ng-switch-when="3" class="checkbox">
                         <label>
                             <input type="checkbox" ng-model="selectedOption" ng-change="$parent.$parent.$parent.toggleSelection(questionOption.id,$parent.$parent.$index)" />
                             {{questionOption.description}}
@@ -23,10 +23,10 @@
                 </div>
             </div>
         </div>
-        <input type="submit" value="Save" />
+        <input type="submit" value="Save" class="btn btn-primary btn-md" />
     </form>
     <div ng-if="surveySubmitted == true">
-        <button ng-click="captureAnother()">Capture another</button>
-        <button ng-click="selecteNewSurvey()">Select new survey</button>
+        <button ng-click="captureAnother()" class="btn btn-primary btn-md">Capture another</button>
+        <button ng-click="selecteNewSurvey()" class="btn btn-primary btn-md">Select new survey</button>
     </div>
 </section>
