@@ -17,6 +17,8 @@ content/normalize.css
 content/bootstrap.min.css
 content/bootstrap-theme.min.css
 content/loading-bar.css
+content/offline-theme-chrome-indicator.css
+content/offline-language-english-indicator.css
 scripts/jquery.min.js
 scripts/bootstrap.min.js
 scripts/angular.min.js

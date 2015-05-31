@@ -73,6 +73,8 @@
     <Content Include="content\bootstrap.min.css" />
     <Content Include="content\loading-bar.css" />
     <Content Include="content\normalize.css" />
+    <Content Include="content\offline-language-english-indicator.css" />
+    <Content Include="content\offline-theme-chrome-indicator.css" />
     <Content Include="index.html" />
     <Content Include="scripts\angular-localForage.js" />
     <Content Include="scripts\angular-resource.min.js" />
