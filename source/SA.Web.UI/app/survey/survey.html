@@ -1,6 +1,6 @@
 ﻿<section ng-controller="surveyController">
     <form name="surveyFrom" ng-submit="submit()" ng-hide="surveySubmitted" class="well col-md">
-        <div ng-repeat="question in questions">
+        <div ng-repeat="question in questions" class="form-group">
             <label>{{question.description}}</label>
             <div ng-repeat="questionOption in question.questionOptions">
                 <div ng-switch on="question.type">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <input type="submit" value="Save" class="btn btn-primary btn-md" />
+        <input type="submit" value="Save" class="btn btn-primary btn-md-2 btn-block" />
     </form>
     <div ng-if="surveySubmitted == true">
         <button ng-click="captureAnother()" class="btn btn-primary btn-md">Capture another</button>

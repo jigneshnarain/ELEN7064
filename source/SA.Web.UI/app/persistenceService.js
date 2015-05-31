@@ -1,10 +1,17 @@
 ﻿'use strict';
-app.service('persistenceService', function ($q, onlinePersistanceStrategy, offlinePersistanceStrategy) {
+app.service('persistenceService', function ($q, offline, onlinePersistanceStrategy, offlinePersistanceStrategy) {
      
-    return {
-        action: function()
-        {
-            return navigator.onLine ? onlinePersistanceStrategy : offlinePersistanceStrategy;
-        }
-    }
+    var self = this;
+
+    self.action = onlinePersistanceStrategy;
+    offline.on("confirmed-up", function () {
+        self.action = onlinePersistanceStrategy;
+    });
+
+
+    offline.on("confirmed-down", function () {
+        self.action = offlinePersistanceStrategy;
+    });
+
+    return self;
 });

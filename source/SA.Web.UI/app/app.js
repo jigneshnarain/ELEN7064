@@ -15,8 +15,16 @@ app.config(function ($routeProvider, $locationProvider, $localForageProvider, cf
     });
 
     cfpLoadingBarProvider.includeSpinner = false;
-});
 
+
+    window.Offline.options = {
+        checks: { xhr: { url: 'http://localhost:32104/api/connection' } }
+    };
+
+    window.Offline.check();
+});
+app.constant('offline', window.Offline);
+app.constant('_', window._);
 app.constant('ngSettings', {
     apiBaseUri: 'http://localhost:32104/api/'
 });

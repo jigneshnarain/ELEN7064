@@ -7,6 +7,13 @@
     <link href="content/bootstrap.min.css" rel="stylesheet" />
     <link href="content/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="content/loading-bar.css" rel="stylesheet" />
+    <script type="text/javascript">
+        var run = function () {
+            if (Offline.state === 'up')
+                Offline.check();
+        }
+        setInterval(run, 60000)
+    </script>
 </head>
 <body ng-cloak>
     <header>
@@ -18,15 +25,20 @@
     </header>
     <article class="container">
         <section class="alert alert-info"
-                 data-ng-show="hasStoredDataToSync"
-                 data-ng-controller="synchronisationController">
-            <span>You have local data to sync to the server.</span>
-            <button data-ng-click="sync()" class="btn btn-primary btn-md">Sync</button>
+                 ng-show="hasStoredDataToSync"
+                 ng-controller="synchronisationController">
+            <div ng-hide="synchronisingData">
+                <span>You have local data to synchronise to the server.</span>
+                <button ng-click="sync()" class="btn btn-default">Synchronise</button>
+            </div>
+            <div>
+                <span ng-show="synchronisingData">Data is currently being synchronised with the server ....</span>
+            </div>
         </section>
         <section class="row" ng-view></section>
     </article>
     <!-- 3rd party libraries -->
-    <script src="scripts/jquery-2.1.4.min.js"></script>
+    <script src="scripts/jquery.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-resource.min.js"></script>
@@ -35,6 +47,8 @@
     <script src="scripts/angular-localForage.js"></script>
     <script src="scripts/angular-uuid2.min.js"></script>
     <script src="scripts/loading-bar.js"></script>
+    <script src="scripts/offline.min.js"></script>
+    <script src="scripts/lodash.min.js"></script>
     <!-- Load app main script -->
     <script src="app/app.js"></script>
     <!-- Load services -->
