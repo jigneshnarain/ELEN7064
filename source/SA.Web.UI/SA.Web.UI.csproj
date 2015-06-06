@@ -67,8 +67,8 @@
     <Content Include="app\survey\survey.html" />
     <Content Include="app\survey\surveyController.js" />
     <Content Include="app\survey\surveyService.js" />
-    <Content Include="app\synchronisation\synchronisationService.js" />
     <Content Include="app\synchronisation\synchronisationController.js" />
+    <Content Include="app\synchronisation\synchronisationService.js" />
     <Content Include="content\bootstrap-theme.min.css" />
     <Content Include="content\bootstrap.min.css" />
     <Content Include="content\loading-bar.css" />
