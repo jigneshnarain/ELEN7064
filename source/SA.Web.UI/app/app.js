@@ -3,9 +3,9 @@
 app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({enabled: true, requireBase: false});
     $routeProvider
-    .when("/viewname", {
-        controller: "controller",
-        templateUrl: "path to html page"
+    .when("/", {
+        controller: "surveyController",
+        templateUrl: "app/survey/survey.html"
     })
      .otherwise({ redirectTo: "/" });
 });
