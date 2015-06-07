@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\survey\IndexedDBCode.js" />
     <Content Include="app\survey\survey.html" />
     <Content Include="app\survey\surveyController.js" />
     <Content Include="content\css\normalize.css" />
