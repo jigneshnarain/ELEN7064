@@ -58,8 +58,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="content\css\normalize.css" />
+    <Content Include="app\reports\reportsController.js" />
+    <Content Include="app\reports\reports.html" />
+    <Content Include="app\reports\reportsService.js" />
+    <Content Include="content\angular-chart.css" />
+    <Content Include="content\loading-bar.css" />
+    <Content Include="content\normalize.css" />
     <Content Include="index.html" />
+    <Content Include="scripts\angular-chart.min.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\chart.min.js" />
+    <Content Include="scripts\loading-bar.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -73,9 +82,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

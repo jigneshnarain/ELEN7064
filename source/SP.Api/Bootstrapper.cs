@@ -19,6 +19,7 @@ namespace SA.Api
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType<SurveyRepository>().AsImplementedInterfaces();
             builder.RegisterType<SurveyResponseRepository>().AsImplementedInterfaces();
+            builder.RegisterType<ReportRepository>().AsImplementedInterfaces();            
             builder.RegisterType<SqlConnection>().AsImplementedInterfaces().InstancePerDependency();
             builder.RegisterType<Accessor>().AsImplementedInterfaces();
             return builder.Build();

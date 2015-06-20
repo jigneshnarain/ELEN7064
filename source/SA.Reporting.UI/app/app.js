@@ -1,13 +1,15 @@
-﻿var app = angular.module('surveyreportingapp', ['ngRoute', 'ngResource']);
+﻿var app = angular.module('surveyreportingapp', ['ngRoute', 'ngResource', "chart.js", 'angular-loading-bar']);
 
-app.config(function ($routeProvider, $locationProvider) {
+app.config(function ($routeProvider, $locationProvider, cfpLoadingBarProvider) {
     $locationProvider.html5Mode({ enabled: true, requireBase: false });
     $routeProvider
-    .when("/viewname", {
-        controller: "controller",
-        templateUrl: "path to html page"
+    .when("/", {
+        controller: "reportsController",
+        templateUrl: "app/reports/reports.html"
     })
      .otherwise({ redirectTo: "/" });
+
+    cfpLoadingBarProvider.includeSpinner = false;
 });
 
 app.constant('ngSettings', {
