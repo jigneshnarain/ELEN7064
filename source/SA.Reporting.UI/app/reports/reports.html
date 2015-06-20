@@ -1,4 +1,4 @@
-﻿<h3 ng-if="surveys.length == 0">Loading data.....</h3>
+﻿
 <div class="form-group" ng-show="surveys.length > 0">
     <label for="survey">Select a survey</label>
     <select class="form-control" id="survey1" name="survey" ng-model="selectedSurvey" ng-options="survey.id as survey.name for survey in surveys" ng-change="getReports()">
