@@ -1,0 +1,17 @@
+﻿
+<div class="form-group" ng-show="surveys.length > 0">
+    <label for="survey">Select a survey</label>
+    <select class="form-control" id="survey1" name="survey" ng-model="selectedSurvey" ng-options="survey.id as survey.name for survey in surveys" ng-change="getReports()">
+        <option value="">Select...</option>
+    </select>
+    
+</div>
+<div class="form-group" ng-show="reports.length > 0">
+    <label for="report">Select a report</label>
+    <select class="form-control" id="report" name="report" ng-model="selectedReport" ng-options="report.id as report.description for report in reports" ng-change="getReportData()">
+        <option value="">Select...</option>
+    </select>   
+</div>
+<div class="form-group" ng-if="selectedReport != null">
+    <canvas id="base" class="chart-base" chart-type="type" data="data" labels="labels" legend="true"></canvas>
+</div>

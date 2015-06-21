@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IReportRepository.cs" />
     <Compile Include="ISurveyResponseRepository.cs" />
     <Compile Include="ISurveyRepository.cs" />
+    <Compile Include="ReportRepository.cs" />
     <Compile Include="SurveyResponseRepository.cs" />
     <Compile Include="SurveyRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

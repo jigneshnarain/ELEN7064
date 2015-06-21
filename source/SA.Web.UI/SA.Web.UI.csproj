@@ -58,14 +58,42 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="content\css\normalize.css" />
+    <Content Include="app\home\home.html" />
+    <Content Include="app\home\homeController.js" />
+    <Content Include="app\home\homeService.js" />
+    <Content Include="app\offlinePersistanceStrategy.js" />
+    <Content Include="app\onlinePersistanceStrategy.js" />
+    <Content Include="app\persistenceService.js" />
+    <Content Include="app\survey\survey.html" />
+    <Content Include="app\survey\surveyController.js" />
+    <Content Include="app\survey\surveyService.js" />
+    <Content Include="app\synchronisation\synchronisationController.js" />
+    <Content Include="app\synchronisation\synchronisationService.js" />
+    <Content Include="content\bootstrap-theme.min.css" />
+    <Content Include="content\bootstrap.min.css" />
+    <Content Include="content\loading-bar.css" />
+    <Content Include="content\normalize.css" />
+    <Content Include="content\offline-language-english-indicator.css" />
+    <Content Include="content\offline-theme-chrome-indicator.css" />
     <Content Include="index.html" />
+    <Content Include="scripts\angular-localForage.js" />
+    <Content Include="scripts\angular-resource.min.js" />
+    <Content Include="scripts\angular-route.min.js" />
+    <Content Include="scripts\angular.min.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\loading-bar.js" />
+    <Content Include="scripts\localforage.min.js" />
+    <Content Include="scripts\angular-uuid2.min.js" />
+    <Content Include="scripts\lodash.min.js" />
+    <Content Include="scripts\offline.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="manifest.appcache" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -73,9 +101,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

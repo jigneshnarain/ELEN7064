@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SA.Models
 {
-    public class SuveryResponseDetail
+    public class ReportSummary
     {
-        public Guid SurveyQuestionOptionId { get; set; }
-        public string ResponseData { get; set; }
+        public string QuestionOption { get; set; }
+        public int Count { get; set; }
     }
 }

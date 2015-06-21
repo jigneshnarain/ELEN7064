@@ -15,7 +15,7 @@ namespace SA.Api.Controllers
 
         public SurveyResponseController(ISurveyResponseRepository surveyResponseRepository)
         {
-            surveyResponseRepository = surveyResponseRepository;
+            this.surveyResponseRepository = surveyResponseRepository;
         }
 
         public IHttpActionResult Post(SurveyResponse surveyResponse)

@@ -39,10 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Report.cs" />
+    <Compile Include="ReportSummary.cs" />
     <Compile Include="SurveyQuestion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SurveyQuestionOption.cs" />
-    <Compile Include="SurveyRespondent.cs" />
     <Compile Include="Survey.cs" />
     <Compile Include="SurveyResponse.cs" />
     <Compile Include="SuveryResponseDetail.cs" />

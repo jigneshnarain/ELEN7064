@@ -20,9 +20,9 @@ namespace SA.Api
 
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
-
-            WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            WebApiConfig.Register(config);
+            
             app.UseWebApi(config);
         }
     }

@@ -1,0 +1,12 @@
+﻿<div ng-hide="hideSelection" class="form-group">
+    <h3 ng-if="surveys.length == 0">Loading data.....</h3>
+    <div class="form-group" ng-show="surveys.length > 0">
+        <label for="survey">Select a survey</label>
+        <select class="form-control" id="survey1" name="survey" ng-model="selectedSurvey" ng-options="survey.id as survey.name for survey in surveys">
+            <option value="">Select...</option>
+        </select>
+    </div>
+    <button class="btn btn-primary btn-md btn-block" ng-if="selectedSurvey != null" ng-click="displaySurvey()">Start Survey</button>
+</div>
+
+<section ng-include="template"></section>
