@@ -1,5 +1,5 @@
 ﻿// Code goes here
-var app = angular.module('myApp', []);
+var app = angular.module("surveyapp", []);
 
 var db = null;
 var thisDB;
