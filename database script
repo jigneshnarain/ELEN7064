@@ -1,0 +1,592 @@
+USE [master]
+GO
+/****** Object:  Database [SurveyData]    Script Date: 2015-06-27 03:43:04 PM ******/
+CREATE DATABASE [SurveyData]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'SurveyData', FILENAME = N'D:\RDSDBDATA\DATA\SurveyData.mdf' , SIZE = 51200KB , MAXSIZE = UNLIMITED, FILEGROWTH = 10%)
+ LOG ON 
+( NAME = N'SurveyData_log', FILENAME = N'D:\RDSDBDATA\DATA\SurveyData_log.ldf' , SIZE = 51200KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [SurveyData] SET COMPATIBILITY_LEVEL = 110
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [SurveyData].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [SurveyData] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [SurveyData] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [SurveyData] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [SurveyData] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [SurveyData] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [SurveyData] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [SurveyData] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [SurveyData] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [SurveyData] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [SurveyData] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [SurveyData] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [SurveyData] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [SurveyData] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [SurveyData] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [SurveyData] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [SurveyData] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [SurveyData] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [SurveyData] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [SurveyData] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [SurveyData] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [SurveyData] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [SurveyData] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [SurveyData] SET RECOVERY FULL 
+GO
+ALTER DATABASE [SurveyData] SET  MULTI_USER 
+GO
+ALTER DATABASE [SurveyData] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [SurveyData] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [SurveyData] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [SurveyData] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+USE [SurveyData]
+GO
+/****** Object:  User [sa]    Script Date: 2015-06-27 03:43:07 PM ******/
+CREATE USER [sa] FOR LOGIN [sa] WITH DEFAULT_SCHEMA=[dbo]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [sa]
+GO
+/****** Object:  Schema [Lookup]    Script Date: 2015-06-27 03:43:09 PM ******/
+CREATE SCHEMA [Lookup]
+GO
+/****** Object:  Schema [Survey]    Script Date: 2015-06-27 03:43:10 PM ******/
+CREATE SCHEMA [Survey]
+GO
+/****** Object:  Schema [System]    Script Date: 2015-06-27 03:43:10 PM ******/
+CREATE SCHEMA [System]
+GO
+/****** Object:  Table [Lookup].[Data]    Script Date: 2015-06-27 03:43:10 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Lookup].[Data](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Description] [varchar](50) NOT NULL,
+	[FieldId] [varchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Lookup].[Institution]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Lookup].[Institution](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[LookupProvinceId] [uniqueidentifier] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Lookup].[Province]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Lookup].[Province](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Name] [varchar](30) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Lookup].[Report]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Lookup].[Report](
+	[SurveyQuestionId] [uniqueidentifier] NOT NULL,
+	[ChartType] [varchar](10) NOT NULL,
+	[RequiresNestedArray] [bit] NOT NULL DEFAULT ((0)),
+ CONSTRAINT [PK_Report] PRIMARY KEY CLUSTERED 
+(
+	[SurveyQuestionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Survey].[Data]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Survey].[Data](
+	[Id] [uniqueidentifier] NOT NULL DEFAULT (newid()),
+	[Name] [varchar](50) NOT NULL,
+	[Description] [varchar](1000) NOT NULL,
+	[SurveyType] [tinyint] NOT NULL,
+	[ValidStartDate] [date] NOT NULL,
+	[ValidEndDate] [date] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Survey].[Question]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Survey].[Question](
+	[Id] [uniqueidentifier] NOT NULL DEFAULT (newid()),
+	[SurveyDataId] [uniqueidentifier] NOT NULL,
+	[Order] [tinyint] NOT NULL,
+	[Type] [tinyint] NOT NULL,
+	[Title] [varchar](100) NOT NULL,
+	[Description] [varchar](1000) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Survey].[QuestionOption]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Survey].[QuestionOption](
+	[Id] [uniqueidentifier] NOT NULL DEFAULT (newid()),
+	[SurveyQuestionId] [uniqueidentifier] NOT NULL,
+	[Order] [tinyint] NOT NULL,
+	[Description] [varchar](1000) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Survey].[Response]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Survey].[Response](
+	[Id] [uniqueidentifier] NOT NULL CONSTRAINT [DF__Response__Id__3A81B327]  DEFAULT (newid()),
+	[SystemUserId] [uniqueidentifier] NOT NULL,
+	[SurveyDataId] [uniqueidentifier] NOT NULL,
+	[StartDateTime] [datetime] NOT NULL,
+	[EndDateTime] [datetime] NOT NULL,
+	[LocationLatitude] [varchar](30) NULL,
+	[LocationLongitude] [varchar](30) NULL,
+	[LookupInstitutionId] [uniqueidentifier] NULL,
+ CONSTRAINT [PK__Response__3214EC07E0403112] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Survey].[ResponseDetail]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Survey].[ResponseDetail](
+	[Id] [uniqueidentifier] NOT NULL DEFAULT (newid()),
+	[SurveyResponseId] [uniqueidentifier] NOT NULL,
+	[SurveyQuestionOptionId] [uniqueidentifier] NOT NULL,
+	[ResponseData] [varchar](1000) NULL,
+	[DateCaptured] [datetime] NOT NULL CONSTRAINT [DF_ResponseDetail_DateCaptured]  DEFAULT (getdate()),
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [System].[User]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [System].[User](
+	[Id] [uniqueidentifier] NOT NULL CONSTRAINT [DF__User__Id__239E4DCF]  DEFAULT (newid()),
+	[Name] [varchar](70) NOT NULL,
+	[Username] [varchar](100) NOT NULL,
+	[Password] [varchar](250) NOT NULL,
+	[MobileNumber] [varchar](13) NULL,
+ CONSTRAINT [PK__User__3214EC07F5CDD45C] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [Lookup].[Data] ADD  DEFAULT (newid()) FOR [Id]
+GO
+ALTER TABLE [Lookup].[Institution] ADD  DEFAULT (newid()) FOR [Id]
+GO
+ALTER TABLE [Lookup].[Province] ADD  DEFAULT (newid()) FOR [Id]
+GO
+ALTER TABLE [Lookup].[Institution]  WITH CHECK ADD  CONSTRAINT [FK_Institution_Province] FOREIGN KEY([LookupProvinceId])
+REFERENCES [Lookup].[Province] ([Id])
+GO
+ALTER TABLE [Lookup].[Institution] CHECK CONSTRAINT [FK_Institution_Province]
+GO
+ALTER TABLE [Lookup].[Report]  WITH CHECK ADD  CONSTRAINT [FK_Report_Question] FOREIGN KEY([SurveyQuestionId])
+REFERENCES [Survey].[Question] ([Id])
+GO
+ALTER TABLE [Lookup].[Report] CHECK CONSTRAINT [FK_Report_Question]
+GO
+ALTER TABLE [Survey].[Question]  WITH CHECK ADD  CONSTRAINT [FK_Question_Data] FOREIGN KEY([SurveyDataId])
+REFERENCES [Survey].[Data] ([Id])
+GO
+ALTER TABLE [Survey].[Question] CHECK CONSTRAINT [FK_Question_Data]
+GO
+ALTER TABLE [Survey].[QuestionOption]  WITH CHECK ADD  CONSTRAINT [FK_QuestionOption_Question] FOREIGN KEY([SurveyQuestionId])
+REFERENCES [Survey].[Question] ([Id])
+GO
+ALTER TABLE [Survey].[QuestionOption] CHECK CONSTRAINT [FK_QuestionOption_Question]
+GO
+ALTER TABLE [Survey].[Response]  WITH CHECK ADD  CONSTRAINT [FK_Response_Data] FOREIGN KEY([SurveyDataId])
+REFERENCES [Survey].[Data] ([Id])
+GO
+ALTER TABLE [Survey].[Response] CHECK CONSTRAINT [FK_Response_Data]
+GO
+ALTER TABLE [Survey].[Response]  WITH CHECK ADD  CONSTRAINT [FK_Response_Institution] FOREIGN KEY([LookupInstitutionId])
+REFERENCES [Lookup].[Institution] ([Id])
+GO
+ALTER TABLE [Survey].[Response] CHECK CONSTRAINT [FK_Response_Institution]
+GO
+ALTER TABLE [Survey].[Response]  WITH CHECK ADD  CONSTRAINT [FK_Response_User] FOREIGN KEY([SystemUserId])
+REFERENCES [System].[User] ([Id])
+GO
+ALTER TABLE [Survey].[Response] CHECK CONSTRAINT [FK_Response_User]
+GO
+ALTER TABLE [Survey].[ResponseDetail]  WITH CHECK ADD  CONSTRAINT [FK_ResponseDetail_QuestionOption] FOREIGN KEY([SurveyQuestionOptionId])
+REFERENCES [Survey].[QuestionOption] ([Id])
+GO
+ALTER TABLE [Survey].[ResponseDetail] CHECK CONSTRAINT [FK_ResponseDetail_QuestionOption]
+GO
+ALTER TABLE [Survey].[ResponseDetail]  WITH CHECK ADD  CONSTRAINT [FK_ResponseDetail_Response] FOREIGN KEY([SurveyResponseId])
+REFERENCES [Survey].[Response] ([Id])
+GO
+ALTER TABLE [Survey].[ResponseDetail] CHECK CONSTRAINT [FK_ResponseDetail_Response]
+GO
+/****** Object:  StoredProcedure [Lookup].[GetReportBySurveyId]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [Lookup].[GetReportBySurveyId]
+@SurveyDataId UNIQUEIDENTIFIER
+AS
+
+SELECT  [Survey].[Question].[Id]
+	   ,[Survey].[Question].[Description]
+	   ,[ChartType]
+	   ,[RequiresNestedArray]
+FROM [Lookup].[Report]
+INNER JOIN [Survey].[Question]
+	ON [Lookup].[Report].[SurveyQuestionId] = [Survey].[Question].[Id]
+WHERE [Survey].[Question].[SurveyDataId] = @SurveyDataId
+GO
+/****** Object:  StoredProcedure [Lookup].[GetSummaryBySurveyQuestionId]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [Lookup].[GetSummaryBySurveyQuestionId] 
+@SurveyQuestionId UNIQUEIDENTIFIER
+AS
+SELECT COALESCE([Survey].[ResponseDetail].[ResponseData],[Survey].[QuestionOption].[Description]) QuestionOption
+		,COUNT ([SurveyQuestionOptionId]) [Count]
+FROM [Survey].[Question]
+INNER JOIN [Survey].[QuestionOption]
+	ON [Survey].[Question].[Id] = [Survey].[QuestionOption].[SurveyQuestionId]
+INNER JOIN [Survey].[ResponseDetail]
+	ON [Survey].[QuestionOption].[Id] =  [Survey].[ResponseDetail].[SurveyQuestionOptionId]
+WHERE [Survey].[Question].[Id] = @SurveyQuestionId
+GROUP BY COALESCE([Survey].[ResponseDetail].[ResponseData],[Survey].[QuestionOption].[Description])
+
+
+GO
+/****** Object:  StoredProcedure [Survey].[GetData]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [Survey].[GetData]
+-- =============================================
+-- Author:		Jignesh Narain
+-- Create date: 2015-05-16
+-- =============================================
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT [Id]
+		  ,[Name]
+		  ,[Description]
+		  ,[SurveyType]
+		  ,[ValidStartDate]
+		  ,[ValidEndDate]
+	  FROM [Survey].[Data]
+	WHERE [ValidStartDate] <= CONVERT(VARCHAR, GETDATE(), 112)
+	AND [ValidEndDate] > CONVERT(VARCHAR, GETDATE(), 112)
+END
+GO
+/****** Object:  StoredProcedure [Survey].[GetQuestionOptions]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [Survey].[GetQuestionOptions]
+@SurveyQuestionId UNIQUEIDENTIFIER
+-- =============================================
+-- Author:		Jignesh Narain
+-- Create date: 2015-05-16
+-- =============================================
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+	DECLARE @SQL NVARCHAR(1100)
+	DECLARE @Parameters NVARCHAR(100)
+	
+	SET @SQL = 'SELECT [Id]
+					  ,[SurveyQuestionId]
+					  ,[Order]
+					  ,[Description]
+				FROM [Survey].[QuestionOption]
+				WHERE [SurveyQuestionId] = @xSurveyQuestionId
+				ORDER BY [Order]'
+
+	SET @Parameters = '@xSurveyQuestionId UNIQUEIDENTIFIER'
+	EXEC SP_EXECUTESQL @SQL, @Parameters, @SurveyQuestionId
+END
+GO
+/****** Object:  StoredProcedure [Survey].[GetQuestions]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [Survey].[GetQuestions]
+@SurveyDataId UNIQUEIDENTIFIER
+-- =============================================
+-- Author:		Jignesh Narain
+-- Create date: 2015-05-16
+-- =============================================
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+	DECLARE @SQL NVARCHAR(1100)
+	DECLARE @Parameters NVARCHAR(100)
+
+	SET @SQL = 'SELECT [Id]
+					  ,[SurveyDataId]
+					  ,[Order]
+					  ,[Type]
+					  ,[Title]
+					  ,[Description]
+				FROM [Survey].[Question]
+				WHERE [SurveyDataId] = @xSurveyDataId
+				ORDER BY [Order]'
+	
+	SET @Parameters = '@xSurveyDataId UNIQUEIDENTIFIER'
+	EXEC SP_EXECUTESQL @SQL, @Parameters, @SurveyDataId
+END
+GO
+/****** Object:  StoredProcedure [Survey].[InsertResponse]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [Survey].[InsertResponse]
+@SystemUserId UNIQUEIDENTIFIER,
+@SurveyDataId UNIQUEIDENTIFIER,
+@StartDateTime DATETIME,
+@EndDateTime DATETIME,
+@LocationLatitude VARCHAR(30),
+@LocationLongitude VARCHAR(30),
+@LookupInstitutionId UNIQUEIDENTIFIER
+-- =============================================
+-- Author:		Jignesh Narain
+-- Create date: 2015-05-16
+-- =============================================
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+	DECLARE @NewUniqueIdTable TABLE (Id UNIQUEIDENTIFIER)
+
+	INSERT INTO [Survey].[Response]
+			   ([SystemUserId]
+			   ,[SurveyDataId]
+			   ,[StartDateTime]
+			   ,[EndDateTime]
+			   ,[LocationLatitude]
+			   ,[LocationLongitude]
+			   ,[LookupInstitutionId])
+	OUTPUT INSERTED.Id INTO @NewUniqueIdTable
+	VALUES
+		(@SystemUserId
+		,@SurveyDataId
+		,@StartDateTime
+		,@EndDateTime
+		,@LocationLatitude
+		,@LocationLongitude
+		,@LookupInstitutionId)
+
+	SELECT Id FROM @NewUniqueIdTable
+END
+
+GO
+/****** Object:  StoredProcedure [Survey].[InsertResponseDetail]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [Survey].[InsertResponseDetail]
+@SurveyResponseId UNIQUEIDENTIFIER,
+@SurveyQuestionOptionId UNIQUEIDENTIFIER,
+@ResponseData VARCHAR(1000)
+
+-- =============================================
+-- Author:		Jignesh Narain
+-- Create date: 2015-05-23
+-- =============================================
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	INSERT INTO [Survey].[ResponseDetail]
+			   ([SurveyResponseId]
+			   ,[SurveyQuestionOptionId]
+			   ,[ResponseData])
+	VALUES
+		(@SurveyResponseId
+		,@SurveyQuestionOptionId
+		,@ResponseData)
+
+END
+GO
+/****** Object:  StoredProcedure [System].[GetUser]    Script Date: 2015-06-27 03:43:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [System].[GetUser]
+@Username VARCHAR(100)
+-- =============================================
+-- Author:		Jignesh Narain
+-- Create date: 2015-05-23
+-- =============================================
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+	DECLARE @SQL NVARCHAR(1000)
+	DECLARE @Parameters NVARCHAR(100)
+	
+	SET @SQL = 'SELECT [Id]
+					  ,[Name]
+					  ,[Username]
+					  ,[Password]
+					  ,[MobileNumber]
+				FROM [System].[User]
+				WHERE [Username] = @xUsername'
+
+	SET @Parameters = '@xUsername VARCHAR(100)'
+	EXEC SP_EXECUTESQL @SQL, @Parameters, @Username
+END
+GO
+
+USE [master]
+GO
+ALTER DATABASE [SurveyData] SET  READ_WRITE 
+GO
